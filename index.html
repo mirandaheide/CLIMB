@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climbing BINGO Generator</title>
+
+   <!-- Link to your CSS file -->
+   <link rel="stylesheet" href="style.css">
+  
+   <!-- Link to your JavaScript file -->
+   <script src="script.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Fugaz+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+
+ <link href="https://fonts.googleapis.com/css?family=Raleway+Dots" rel="stylesheet" type="text/css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+</head>
+
+<body>
+  <h1 class="bungee-shade-regular">Climbing BINGO</h1>
+
+  <div class="tooltip">
+   <button id="toggle-panel-btn" class="toggle-panel-btn tooltip">◀</button>
+    <span class="tooltiptext">Hide or show setup panel</span>
+  </div>
+
+ 
+
+<div class="container">
+  
+ 
+
+  <div class="setup-panel">
+    <!-- Remove the button that's currently inside here -->
+    <!-- Keep all your form content -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="climbing-type">Climbing Type:</label>
+        <select id="climbing-type">
+          <option value="routeClimbing">Route Climbing</option>
+          <option value="bouldering">Bouldering</option>
+        </select>
+      </div>
+        
+        <div class="form-group">
+          <label for="grade-system">Grading System:</label>
+          <select id="grade-system">
+            <option value="vScale">V-Scale</option>
+            <option value="font">Font (Fontainebleau)</option>
+          </select>
+        </div>
+
+   <div class="form-group, tooltip" id="circuit-grading-group" style="display: none;">
+  <label for="circuit-grading">Circuit Grading:</label>
+  <span class="tooltiptext">If a range of grades is denoted by a single color</span>
+  <select id="circuit-grading">
+    <option value="no">No</option>
+    <option value="yes">Yes</option>
+  </select>
+</div>
+
+
+
+      </div>
+
+
+
+
+
+
+      
+      <div class="form-group">
+        <label>Grade Range:</label>
+
+        <div class="slider-container">
+          <div class="grade-display">
+            <span id="min-grade-display">V0</span> to <span id="max-grade-display">V5</span>
+          </div>
+
+          <div class="double-slider">
+            <input type="range" id="min-grade-slider" min="0" max="20" value="0" class="slider slider-min">
+            <input type="range" id="max-grade-slider" min="0" max="20" value="5" class="slider slider-max">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>Available Features:</label>
+        <div class="feature-selector">
+
+          <div class="feature-category">
+            <button type="button" class="category-toggle" data-category="colors">
+              <span class="toggle-icon">▼</span> Route Colors
+            </button>
+            <div id="color-options" class="feature-checkboxes"></div>
+          </div>
+
+          <div class="feature-category">
+            <button type="button" class="category-toggle" data-category="holds">
+              <span class="toggle-icon">▼</span> Hold Types
+            </button>
+            <div id="hold-types" class="feature-checkboxes"></div>
+          </div>
+          
+          <div class="feature-category">
+            <button type="button" class="category-toggle" data-category="moves">
+              <span class="toggle-icon">▼</span> Move Types
+            </button>
+            <div id="move-types" class="feature-checkboxes"></div>
+          </div>
+          
+
+          <div class="feature-category">
+            <button type="button" class="category-toggle" data-category="route-features">
+              <span class="toggle-icon">▼</span> Wall Type:
+            </button>
+            <div id="route-features" class="feature-checkboxes"></div>
+          </div>
+        </div>
+      </div>
+      
+      <button id="generate-btn">Generate Card</button>
+      <button id="reset-btn" class="secondary-btn">Reset</button>
+    
+    </div>
+    
+
+    
+    <div class="bingo-card">
+
+      <div class="bingo-header">
+        <div class="bingo-letter">C</div>
+        <div class="bingo-letter">L</div>
+        <div class="bingo-letter">I</div>
+        <div class="bingo-letter">M</div>
+        <div class="bingo-letter">B</div>
+      </div>
+      
+      <div id="bingo-grid" class="bingo-grid">
+        <div class="placeholder-text">Configure your settings and click "Generate BINGO Card" to start!</div>
+      </div>
+
+      <button class="print-btn" onclick="window.print()">Print Card</button>
+    
+
+  <section>
+  <ul id="services" style="padding-inline-start: 0px; text-align: right; margin-bottom: 0px;">
+
+    <li>
+      <div class="share" id="copyLinkBtn">
+      
+          <i class="fa fa-share" aria-hidden="true"></i>
+        <span id="copyFeedback" style="display:none; color: green; font-size: xx-small;">Link copied!</span>
+
+      </div>
+ 
+    </li>
+ <li>
+  <div class="twitter">
+    <a href="#" id="contact-btn">
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+    </a>
+  </div>
+</li>
+
+   
+  </ul>
+ 
+</section>
+
+
+
+    </div>
+
+<div>
+
+</div>
+
+
+  </div>
+
+<div id="contact-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Contact Me</h2>
+    <p>Have suggestions or feedback? Send me a message!</p>
+   <form
+  action="https://formspree.io/f/myzrpnaq"
+  method="POST" id="contact-form"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
+  </div>
+</div>
+
+
+</body>
+</html>
