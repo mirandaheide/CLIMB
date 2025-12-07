@@ -8,19 +8,19 @@ const climbingGrades = {
     ],
     font: [
       "3", "4-", "4", "4+", "5", "5+", "6A", "6A+", "6B", "6B+", "6C", "6C+", 
-      "7A", "7A+", "7B", "7B+", "7C", "7C+", "8A", "8A+", "8B", "8B+", "8C", "8C+", "9A"
+      "7A", "7A+", "7B", "7B+", "7C", "7C+", "8A", "8A+"
     ]
   },
   
   // Route climbing grades
   routeClimbing: {
     yds: [
-      "5.0", "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8", "5.9", 
+      "5.5", "5.6", "5.7", "5.8", "5.9", 
       "5.10a", "5.10b", "5.10c", "5.10d", "5.11a", "5.11b", "5.11c", "5.11d",
-      "5.12a", "5.12b", "5.12c", "5.12d", "5.13a", "5.13b", "5.13c", "5.13d"
+      "5.12a", "5.12b", "5.12c", "5.12d", "5.13a"
     ],
     french: [
-      "1", "2", "3", "4a", "4b", "4c", "5a", "5b", "5c", "6a", "6a+", "6b", "6b+", "6c", 
+     "4a", "4b", "4c", "5a", "5b", "5c", "6a", "6a+", "6b", "6b+", "6c", 
       "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8a", "8a+", "8b", "8b+"
     ]
   },
@@ -33,9 +33,6 @@ const climbingGrades = {
     ],
     holdTypes: [
       "Jug", "Crimp", "Sloper", "Pinch", "Pocket"
-    ],
-    moveTypes: [
-      "Dyno", "Heel hook", "Toe hook", "Flag"
     ],
     routeFeatures: [
       "Slab", "Vertical", "Overhang"
@@ -104,7 +101,6 @@ function initializeForm() {
   // Populate all features including colors using the same method
   populateFeatures('color-options', climbingGrades.climbingFeatures.routeColors);
   populateFeatures('hold-types', climbingGrades.climbingFeatures.holdTypes);
-  populateFeatures('move-types', climbingGrades.climbingFeatures.moveTypes);
   populateFeatures('route-features', climbingGrades.climbingFeatures.routeFeatures);
 
   // Add toggle functionality for feature categories
@@ -157,17 +153,25 @@ function initializeForm() {
   updateColorVisibility();
 }
 
-// Populate feature checkboxes
+// Populate feature buttons (changed from checkboxes to button-style)
 function populateFeatures(containerId, features) {
   const container = document.getElementById(containerId);
   features.forEach(feature => {
     const featureDiv = document.createElement('div');
-    featureDiv.className = 'feature-option';
+    featureDiv.className = 'feature-option'; // Unselected by default
     const safeId = `feature-${feature.toLowerCase().replace(/\s+/g, '-')}`;
     featureDiv.innerHTML = `
-      <input type="checkbox" id="${safeId}" value="${feature}" checked>
+      <input type="checkbox" id="${safeId}" value="${feature}">
       <label for="${safeId}">${feature}</label>
     `;
+    
+    // Add click handler to toggle selection
+    featureDiv.addEventListener('click', () => {
+      const checkbox = featureDiv.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+      featureDiv.classList.toggle('selected', checkbox.checked);
+    });
+    
     container.appendChild(featureDiv);
   });
 }
@@ -276,7 +280,7 @@ function generateBingoCard() {
   }
 
   const selectedFeatures = [];
-  document.querySelectorAll('#hold-types input:checked, #move-types input:checked, #route-features input:checked').forEach(input => {
+  document.querySelectorAll('#hold-types input:checked, #route-features input:checked').forEach(input => {
     selectedFeatures.push(input.value);
   });
   
@@ -293,18 +297,6 @@ function generateBingoCard() {
   }
   
   bingoGrid.innerHTML = '';
-
-
-
-
-
-
-
-
-
-
-
-
 
   // Generate 25 BINGO cells (5x5 grid)
   for (let i = 0; i < 25; i++) {
@@ -336,7 +328,7 @@ function generateBingoCard() {
           ];
           cell.textContent = phrasings[Math.floor(Math.random() * phrasings.length)];
         } else {
-          const modifiers = ['Clean', 'Flash', 'No rest', 'Silent feet', 'Campus', 'One hang'];
+          const modifiers = ['First Attempt', 'Silent feet'];
           const modifier = modifiers[Math.floor(Math.random() * modifiers.length)];
           cell.textContent = `${modifier}: ${randomGrade}`;
         }
@@ -361,7 +353,7 @@ function generateBingoCard() {
           ];
           cell.textContent = phrasings[Math.floor(Math.random() * phrasings.length)];
         } else {
-          const modifiers = ['Clean', 'Flash', 'No rest', 'Silent feet', 'Campus', 'One hang'];
+          const modifiers = ['First Attempt', 'Silent feet'];
           const modifier = modifiers[Math.floor(Math.random() * modifiers.length)];
           cell.textContent = `${modifier}: ${randomColor} ${randomGrade}`;
         }
@@ -374,22 +366,6 @@ function generateBingoCard() {
   console.log('BINGO card generated successfully!');
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Save preferences to localStorage
 function savePreferences() {
   const preferences = {
@@ -399,7 +375,7 @@ function savePreferences() {
     minGrade: document.getElementById('min-grade-slider').value,
     maxGrade: document.getElementById('max-grade-slider').value,
     colors: Array.from(document.querySelectorAll('#color-options input:checked')).map(input => input.value),
-    features: Array.from(document.querySelectorAll('#hold-types input:checked, #move-types input:checked, #route-features input:checked')).map(input => input.value)
+    features: Array.from(document.querySelectorAll('#hold-types input:checked, #route-features input:checked')).map(input => input.value)
   };
   
   localStorage.setItem('climbingBingoPreferences', JSON.stringify(preferences));
@@ -439,13 +415,17 @@ function loadPreferences() {
     
     if (preferences.colors) {
       document.querySelectorAll('#color-options input[type="checkbox"]').forEach(input => {
-        input.checked = preferences.colors.includes(input.value);
+        const isChecked = preferences.colors.includes(input.value);
+        input.checked = isChecked;
+        input.closest('.feature-option').classList.toggle('selected', isChecked);
       });
     }
     
     if (preferences.features) {
-      document.querySelectorAll('#hold-types input[type="checkbox"], #move-types input[type="checkbox"], #route-features input[type="checkbox"]').forEach(input => {
-        input.checked = preferences.features.includes(input.value);
+      document.querySelectorAll('#hold-types input[type="checkbox"], #route-features input[type="checkbox"]').forEach(input => {
+        const isChecked = preferences.features.includes(input.value);
+        input.checked = isChecked;
+        input.closest('.feature-option').classList.toggle('selected', isChecked);
       });
     }
     
@@ -465,8 +445,11 @@ function resetPreferences() {
     gradeSystemSelect.value = 'yds';
     circuitGradingSelect.value = 'no';
     
-    document.querySelectorAll('.feature-checkboxes input[type="checkbox"]').forEach(input => {
-      input.checked = true;
+    // Unselect all feature buttons
+    document.querySelectorAll('.feature-option').forEach(option => {
+      const checkbox = option.querySelector('input[type="checkbox"]');
+      checkbox.checked = false;
+      option.classList.remove('selected');
     });
     
     document.getElementById('min-grade-slider').value = 0;
