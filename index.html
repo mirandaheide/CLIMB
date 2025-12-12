@@ -28,12 +28,53 @@
 <body>
   <h1 class="bungee-shade-regular">Climbing BINGO</h1>
 
-  <!-- <div class="tooltip">
-   <button id="toggle-panel-btn" class="toggle-panel-btn tooltip">◀</button>
-    <span class="tooltiptext">Hide or show setup panel</span>
+ <div id="mainMenu" class="main-menu">
+    <ul id="autoNav" class="main-nav">
+      <li>
+        <a href="#" class="show-howto">How to Play</a>
+      </li>
+      <li>
+        <a href="#" id="copyLinkBtn">Share</a>
+        <span id="copyFeedback" style="display:none; color: green; font-size: xx-small;">Link copied!</span>
+      </li>
+      <li>
+        <a href="#" id="contact-btn">Contact</a>
+      </li>
+     
+    </ul>
   </div>
 
-  -->
+<div class="howto hidden">
+
+  <h1 class="howto-title">Let's get this thing going!</h1>
+  
+  <h2 class="subtitle">Setup Your Card</h2>
+  <p>
+    Pick your climbing style (bouldering or rope climbing) and your grading convention. "Grading system" is the convention your gym uses to label their routes and boulders.
+    <br><br>
+  
+    Select the colors and other features available at your gym. Once ready, hit "Generate Card" and you're ready to climb!
+  </p>
+  
+  <h2 class="subtitle">At the Gym</h2>
+  <p>
+    Each square is a challenge to complete. Send a climb that matches the description, then tap 
+    the square to mark it complete. Get five in a row (horizontal, vertical, or diagonal) to win!
+  </p>
+  
+  <h2 class="subtitle">Pro Tips</h2>
+  <p>
+    <strong>Circuit grading?</strong> Select "Yes" if your gym uses color-based difficulty levels. In this case, be sure to only select colors that correspond to your target levels of difficulty.</p> 
+   <p> <strong>Free Climb square?</strong> That's your freebie - it's already marked!</p>
+   <p> <strong>Wildcards?</strong> "Climber's Choice" and "Friend's Choice" let you pick any climb.</p>
+    <p><strong>Stuck?</strong> Generate a new card anytime - no two cards are the same!
+  </p>
+    <button class="close-howto">Climb on!</button>
+</div>
+
+<div class="overlay hidden"></div>
+
+
 
 <div class="container">
   
@@ -59,7 +100,10 @@
           </select>
         </div>
 
-   <div class="form-group, tooltip" id="circuit-grading-group" style="display: none;">
+
+
+
+ <div class="form-group, tooltip" id="circuit-grading-group" style="display: none;">
   <label for="circuit-grading">Circuit Grading:</label>
   <span class="tooltiptext">If a range of grades is denoted by a single color</span>
   <select id="circuit-grading">
@@ -70,15 +114,23 @@
 
 
 
+
       </div>
 
 
 
+<!-- //where my new difficulty element will be?  -->
 
+<div class="feature-category" id="difficulty-selector">
+            <button type="button" class="category-toggle" data-category="level">
+              <span class="toggle-icon">▼</span> Climbing Level
+            </button>
+            <div id="circuit-level" class="feature-checkboxes"></div>
+          </div>
 
 
       
-      <div class="form-group">
+      <div class="form-group" id="slider-elements">
         <label>Grade Range:</label>
 
         <div class="slider-container">
@@ -94,12 +146,16 @@
 
       </div>
 
+
+        
+
+
       <div class="form-group">
         <label>Available Features:</label>
         <div class="feature-selector">
 
           <div class="feature-category">
-            <button type="button" class="category-toggle" data-category="colors">
+            <button type="button" class="category-toggle" data-category="colors" id="smart-label-color">
               <span class="toggle-icon">▼</span> Route Colors
             </button>
             <div id="color-options" class="feature-checkboxes"></div>
@@ -136,8 +192,11 @@
     
  <div class="tooltip">
    <button id="toggle-panel-btn" class="toggle-panel-btn tooltip">◀</button>
-    <span class="tooltiptext">Hide or show setup panel</span>
+    <span class="tooltiptext">Hide or show setup panel</span><br>
+    <!-- <span><i class="fa fa-info-circle info" style="font-size: 24px;" aria-hidden="true"></i></span> -->
   </div>
+
+ 
 
     
     <div class="bingo-card">

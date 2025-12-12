@@ -1,4 +1,37 @@
-/* Basic styling */
+/* ========================================
+   FONTS & TYPOGRAPHY
+   ======================================== */
+
+.fugaz-one-regular {
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bungee-shade-regular {
+  font-family: "Bungee Shade", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat-400 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.outfit {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: thin;
+}
+
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
 body {
   font-family: "Outfit", sans-serif;
   max-width: 1200px;
@@ -13,15 +46,21 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 55px;
+  font-size: 60px;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
+
+
+/* ========================================
+   LAYOUT & CONTAINERS
+   ======================================== */
 
 .container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  align-items: flex-start;
 }
 
 .setup-panel {
@@ -31,6 +70,10 @@ h1 {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.setup-panel.collapsed {
+  display: none;
 }
 
 .bingo-card {
@@ -43,11 +86,45 @@ h1 {
   justify-content: center;
 }
 
+.bingo-card.expanded {
+  flex: 1;
+  max-width: 100%;
+}
+
+.toggle-panel-btn {
+  background-color: #6c757d;
+  opacity: 50%;
+  width: 30px;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 200;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+  margin-top: 5px;
+}
+
+.toggle-panel-btn:hover {
+  background-color: #5a6268;
+}
+
+.align-right {
+  justify-content: right;
+}
+
+
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
 .form-group {
   margin-bottom: 20px;
 }
 
-/* Two-column layout for form groups */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -57,13 +134,6 @@ h1 {
 
 .form-row .form-group {
   margin-bottom: 0;
-}
-
-/* Stack on mobile */
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
 }
 
 label {
@@ -79,8 +149,22 @@ select, input {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
-  font-family: "Outfit", sans-serif; /* Add this line */
+  font-family: "Outfit", sans-serif;
 }
+
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.info {
+  color: white;
+  margin-left: 4px;
+  margin-top: 12px;
+
+}
+
+   
 
 button {
   background-color: #f6511d;
@@ -111,45 +195,20 @@ button:hover {
   background-color: #5a6268;
 }
 
-/* Color Grid Styling */
-.color-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 10px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-radius: px;
+.print-btn {
+  background-color: #7fb800;
+  margin-top: 20px;
 }
 
-.color-option {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  background: white;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
+.print-btn:hover {
+  background-color: #45a049;
 }
 
-.color-option:hover {
-  border-color: #ef8354;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
 
-.color-option input[type="checkbox"] {
-  width: auto;
-  margin-right: 8px;
-  cursor: pointer;
-}
+/* ========================================
+   FEATURE SELECTOR
+   ======================================== */
 
-.color-option.selected {
-  border-color: #ef8354;
-  background-color: #fff5f2;
-}
-
-/* Feature Selector Styling */
 .feature-selector {
   background-color: #f8f9fa;
   border-radius: 4px;
@@ -174,7 +233,7 @@ button:hover {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  font-family: "Outfit", sans-serif; /* Add this line */
+  font-family: "Outfit", sans-serif;
   font-weight: 300;
   display: flex;
   align-items: center;
@@ -235,25 +294,72 @@ button:hover {
   border-color: #f6511d;
 }
 
-/* Hide the actual checkbox */
-.feature-option input[type="checkbox"] {
+.feature-option input[type="checkbox"],
+.feature-option input[type="radio"] {
   display: none;
 }
 
+.feature-option input[type="radio"] + label,
 .feature-option label {
   margin: 0;
   font-weight: normal;
   cursor: pointer;
   font-size: 14px;
   width: 100%;
+  user-select: none;
 }
 
-/* Slider Styling - Simplified */
+
+/* ========================================
+   COLOR GRID
+   ======================================== */
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.color-option {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.color-option:hover {
+  border-color: #ef8354;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.color-option input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.color-option.selected {
+  border-color: #ef8354;
+  background-color: #fff5f2;
+}
+
+
+/* ========================================
+   SLIDER CONTROLS
+   ======================================== */
+
 .slider-container {
   margin: 15px auto;
   padding-left: 15px;
-    padding-right: 15px;
-
+  padding-right: 15px;
   border-radius: 4px;
   width: 60%;
 }
@@ -316,7 +422,96 @@ button:hover {
   background: #2d3142;
 }
 
-/* BINGO card styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 2px;
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  background-color: #a3a9b9;
+  cursor: pointer;
+  margin-top: -14px;
+  pointer-events: auto;
+  border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #3264fe;
+  pointer-events: auto;
+  border: none;
+}
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #3264fe;
+  pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: #ffffff;
+  border: 1px solid #3264fe;
+}
+
+
+/* ========================================
+   BINGO CARD
+   ======================================== */
+
+.bingo-header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bingo-letter {
+  background-color: #f6511d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 28px;
+  border-style: double;
+  border-radius: 10px;
+}
+
 .bingo-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -365,340 +560,23 @@ button:hover {
   font-size: 16px;
 }
 
-.bingo-header {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.bingo-letter {
-  background-color: #f6511d;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  font-size: 28px;
- border-style: double;
-  border-radius: 10px;
-}
-
-.completed {
+.bingo-cell.completed {
   background-color: #efc67a;
   text-decoration: line-through;
   opacity: 0.7;
 }
 
-.print-btn {
-  background-color: #7fb800;
-  margin-top: 20px;
-}
 
-.print-btn:hover {
-  background-color: #45a049;
-}
-
-@media print {
-  .setup-panel, .print-btn {
-    display: none;
-  }
-  .container {
-    display: block;
-  }
-  .bingo-card {
-    box-shadow: none;
-  }
-  .bingo-cell {
-    break-inside: avoid;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-  
-  .slider-container {
-    width: 90%;
-  }
-  
-  .bingo-grid {
-    min-height: 400px;
-  }
-  
-  .bingo-cell {
-    height: 80px;
-    font-size: 11px;
-  }
-  
-  .color-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  }
-  
-  .feature-checkboxes {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-input[type="range"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width:100%;
-  outline: none;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  background-color: transparent;
-  pointer-events: none;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  height: 2px;
-}
-input[type="range"]::-moz-range-track {
-  -moz-appearance: none;
-  height: 5px;
-}
-input[type="range"]::-ms-track {
-  appearance: none;
-  height: 5px;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  background-color: #a3a9b9;
-  cursor: pointer;
-  margin-top: -14px;
-  pointer-events: auto;
-  border-radius: 50%;
-}
-input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: #3264fe;
-  pointer-events: auto;
-  border: none;
-}
-input[type="range"]::-ms-thumb {
-  appearance: none;
-  height: 1.7em;
-  width: 1.7em;
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: #3264fe;
-  pointer-events: auto;
-}
-input[type="range"]:active::-webkit-slider-thumb {
-  background-color: #ffffff;
-  border: 1px solid #3264fe;
-}
-
-
-
-
-
-.fugaz-one-regular {
-  font-family: "Fugaz One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-.bungee-shade-regular {
-  font-family: "Bungee Shade", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-
-.montserrat-400 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-
-
-
-.outfit {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: thin;
-}
-
-
-
-/* Tooltip container */
-.tooltip {
-  position: relative; /* Essential for positioning the tooltip text */
-  display: inline-block; /* Allows the container to wrap its content */
-  /* Optional: Add styling for the hoverable element */
-  border-bottom: 1px dotted black; 
-  cursor: pointer;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden; /* Hide by default */
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1; /* Ensures the tooltip appears on top */
-  bottom: 125%; /* Positions the tooltip above the element */
-  left: 50%;
-  margin-left: -60px; /* Centers the tooltip horizontally */
-
-  /* Fade in animation */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Tooltip arrow (optional) */
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%; /* Position the arrow at the bottom of the tooltip */
-  left: 50%;
-  margin-left: -5px; /* Centers the arrow */
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent; /* Creates a triangle */
-}
-
-/* Show the tooltip text when hovering over the container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-
-
-.align-right {
-  justify-content:right;
-}
-
-
-
-.toggle-panel-btn {
-  background-color: #6c757d;
-  opacity: 50%;
-  width: 30px;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-family: "Outfit", sans-serif;
-  font-weight: 200;
-  transition: background-color 0.3s;
-  align-self: flex-start;
-  margin-top: 5px;
-
-}
-
-.toggle-panel-btn:hover {
-  background-color: #5a6268;
-}
-
-.setup-panel.collapsed {
-  display: none;
-}
-
-.bingo-card.expanded {
-  flex: 1;
-  max-width: 100%;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-section #services {
-  /* text-align: center; */
-  transform: translatez(0);
-}
-
-section #services li {
-  display: inline-block;
-  /* margin: 20px; */
-  list-style: none;
-}
-
-section #services li div {
-  width: 30px;
-  height: 30px;
-  color: #FFB400;
-  font-size: 1.5em;
-  text-align: center;
-  line-height: 30px;
-  background-color: #fff;
-  transition: all 0.5s ease;
-}
-section #services li a {
-  color: #FFB400;
-}
-section #services li div:hover {
-  transform: rotate(360deg);
-  border-radius: 100px;
-}
-section #services li span {
-  width: 60px;
-  height: 20px;
-  display: block;
-
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  text-align: center;
-}
+/* ========================================
+   FOOTER & SOCIAL
+   ======================================== */
 
 .bingo-footer {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin-top: 20px;
-  grid-column: 2; /* Keeps it in the bingo card column */
+  grid-column: 2;
 }
 
 .footer-btn {
@@ -731,24 +609,50 @@ section #services li span {
   cursor: pointer;
 }
 
+section #services {
+  transform: translatez(0);
+}
+
+section #services li {
+  display: inline-block;
+  list-style: none;
+}
+
+section #services li div {
+  width: 30px;
+  height: 30px;
+  color: #FFB400;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 30px;
+  background-color: #fff;
+  transition: all 0.5s ease;
+}
+
+section #services li a {
+  color: #FFB400;
+}
+
+section #services li div:hover {
+  transform: rotate(360deg);
+  border-radius: 100px;
+}
+
+section #services li span {
+  width: 60px;
+  height: 20px;
+  display: block;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  text-align: center;
+}
 
 
+/* ========================================
+   MODAL
+   ======================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Modal styles */
 .modal {
   display: none;
   position: fixed;
@@ -826,4 +730,336 @@ section #services li span {
 
 #contact-form button:hover {
   background-color: #e76f51;
+}
+
+
+/* ========================================
+   TOOLTIP
+   ======================================== */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; 
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========================================
+   MEDIA QUERIES - TABLET
+   ======================================== */
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    margin: 0;
+    max-width: 95vw;
+    overflow-x: hidden;
+  }
+  
+  h1 {
+    padding: 0 10px;
+    font-size: 40px;
+  }
+  
+  /* Consistent margins on mobile */
+  .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin-right: 5px;
+  }
+  
+  .setup-panel {
+    width: calc(100% - 20px) !important;
+    max-width: 100%;
+    min-width: unset;
+    border-radius: 8px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .bingo-card {
+    width: calc(100% - 20px) !important;
+    max-width: 100%;
+    min-width: unset;
+    border-radius: 8px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  /* Adjust collapse button positioning */
+  .toggle-panel-btn {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    margin-left: 0;
+  }
+  
+  /* Ensure collapsed/expanded states work on mobile */
+  .setup-panel.collapsed {
+    display: none;
+  }
+  
+  .bingo-card.expanded {
+    width: calc(100% - 20px) !important;
+    max-width: 100%;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .slider-container {
+    width: 85%;
+    max-width: 100%;
+  }
+  
+  .bingo-grid {
+    min-height: 400px;
+    gap: 5px;
+    width: 100%;
+  }
+  
+  .bingo-cell {
+    height: 70px;
+    font-size: 10px;
+    padding: 4px;
+  }
+  
+  .bingo-letter {
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .color-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .feature-checkboxes {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 150px;
+    padding: 10px;
+  }
+  
+  .bingo-footer {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .footer-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Prevent content overflow */
+  select, input, button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* ========================================
+   MEDIA QUERIES - MOBILE
+   ======================================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+  
+  h1 {
+    font-size: 32px;
+    padding: 0 8px;
+  }
+  
+  .container {
+    padding: 0 8px;
+    gap: 12px;
+  }
+  
+  .setup-panel,
+  .bingo-card {
+    width: calc(100% - 16px) !important;
+  }
+  
+  .bingo-cell {
+    height: 60px;
+    font-size: 9px;
+    padding: 2px;
+  }
+  
+  .bingo-grid {
+    gap: 3px;
+  }
+  
+  .feature-checkboxes {
+    grid-template-columns: 1fr;
+    padding: 8px;
+  }
+  
+  .slider-container {
+    width: 90%;
+  }
+}
+
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+  .setup-panel, .print-btn {
+    display: none;
+  }
+  
+  .container {
+    display: block;
+  }
+  
+  .bingo-card {
+    box-shadow: none;
+  }
+  
+  .bingo-cell {
+    break-inside: avoid;
+  }
+}
+
+
+
+
+
+
+
+
+.main-menu {
+  max-width: 800px;
+}
+.main-nav {
+  display: inline-flex;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 30px;
+  margin-top: 0px;
+}
+.main-nav li a {
+  padding: 2px;
+  text-transform: capitalize;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight:200;
+  font-family: Outfit, sans-serif;
+  text-decoration: none;
+  color: white;
+}
+
+.main-nav li a:hover{
+  opacity: 75%;
+}
+
+
+
+
+/* styling for pop up modal */
+
+
+
+.show-howto {
+  cursor: pointer;
+}
+
+.close-howto {
+align-content: right;
+  font-size: 5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.howto-title {
+  font-size: 2rem;
+  color: black;
+}
+
+p {
+  font-size: 1.3rem;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+/* -------------------------- */
+/* CLASSES TO MAKE MODAL WORK */
+.hidden {
+  display: none;
+}
+
+.howto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+
+  background-color: white;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+
+
+
+.subtitle {
+  color:#ef8354;
+  margin-bottom: 5px;
 }
