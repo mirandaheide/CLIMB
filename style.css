@@ -289,9 +289,9 @@ button:hover {
 }
 
 .feature-option.selected {
-  background-color: #f6511d;
+  background-color: #f69477;
   color: white;
-  border-color: #f6511d;
+  border-color: #f69477;
 }
 
 .feature-option input[type="checkbox"],
