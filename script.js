@@ -122,20 +122,32 @@ function initializeForm() {
   circuitGradingSelect = document.getElementById('circuit-grading');
   colorCategory = document.querySelector('[data-category="colors"]').closest('.feature-category');
 
-  // Populate all features including colors using the same method
-  populateFeatures('color-options', climbingGrades.climbingFeatures.routeColors);
-  populateFeatures('hold-types', climbingGrades.climbingFeatures.holdTypes);
-  populateFeatures('route-features', climbingGrades.climbingFeatures.routeFeatures);
-  populateFeatures('circuit-level', climbingGrades.circuitDifficulty.difficulty);
 
-  // Add toggle functionality for feature categories
-  document.querySelectorAll('.category-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const checkboxContainer = button.nextElementSibling;
-      checkboxContainer.classList.toggle('collapsed');
-      button.classList.toggle('collapsed');
-    });
+
+
+
+// Populate all features including colors using the same method
+populateFeatures('color-options', climbingGrades.climbingFeatures.routeColors);
+populateFeatures('hold-types', climbingGrades.climbingFeatures.holdTypes);
+populateFeatures('route-features', climbingGrades.climbingFeatures.routeFeatures);
+populateFeatures('circuit-level', climbingGrades.circuitDifficulty.difficulty);
+
+// Add toggle functionality for feature categories
+document.querySelectorAll('.category-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const checkboxContainer = button.nextElementSibling;
+    checkboxContainer.classList.toggle('collapsed');
+    button.classList.toggle('collapsed');
   });
+});
+
+// SET DEFAULT VALUES - ensures dropdowns are aligned on first page load
+climbingTypeSelect.value = 'routeClimbing';
+circuitGradingSelect.value = 'no';
+updateGradeSystemOptions();  // This populates the grade system dropdown
+gradeSystemSelect.value = 'yds';  // Then set it to YDS
+
+
 
   // Initialize grade slider
   initializeGradeSlider();
