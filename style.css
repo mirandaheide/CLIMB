@@ -794,7 +794,7 @@ section #services li span {
 
 .close-howto {
 align-content: right;
-  font-size: 5rem;
+  font-size: 2rem;
   color: #333;
   cursor: pointer;
   border: none;
@@ -821,23 +821,23 @@ p {
 .howto {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 42%;
   transform: translate(-50%, -50%);
   width: 70%;
-
+margin: 2rem;
   background-color: white;
-  padding: 6rem;
+  padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 110vh;
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   z-index: 5;
@@ -885,6 +885,44 @@ p {
     font-size: 40px;
   }
   
+
+
+
+    
+    .howto p {
+      font-size: 14px;
+    }
+
+    .howto h1 {
+      font-size: 18px;
+      padding-left: 0px;
+    }
+
+
+    .howto button {
+      font-size: 20px;
+      padding: 10px;
+      font-weight: strong;
+    }
+
+      .howto h2 {
+      font-size: 16px;
+      padding-left: 0px;
+    }
+
+.overlay {
+  position:fixed;
+
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%h;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+
 
 .bingo-cell.center {
   background-color: #ffb400;
@@ -1020,13 +1058,13 @@ p {
 
 .howto {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 30%;
+  left: 37%;
   transform: translate(-50%, -50%);
-  width: 70%;
-
+  width: 70vw;
   background-color: white;
-  padding: 6rem;
+  padding: 2rem;
+  margin: 4rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
@@ -1035,7 +1073,7 @@ p {
 
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -1124,8 +1162,8 @@ p {
  
     .howto {
         position: absolute;
-        top: 90%;
-        left: 50%;
+        top: 35%;
+        left: 35%;
         transform: translate(-50%, -50%);
         width: 70%;
         background-color: white;
@@ -1159,12 +1197,12 @@ p {
     }
 
 .overlay {
-  position:absolute;
+  position:fixed;
 
   top: 0;
   left: 0;
   width: 100vw;
-  height: 300vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   z-index: 5;
