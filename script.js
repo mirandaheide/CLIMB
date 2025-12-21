@@ -456,7 +456,7 @@ function getSelectedGradeRange() {
 }
 
 // Generate a single bingo cell
-function generateBingoCell(gradeRange, selectedColors, selectedHoldTypes, selectedWallTypes, isCircuitGrading, climbingType, difficultyContext = null) {
+function generateBingoCell(gradeRange, selectedColors, selectedHoldTypes, selectedWallTypes, isCircuitGrading, climbingType, difficultyContext = null, singleAttributeCount = {}) {
   let cellText = '';
   let attempts = 0;
   const maxAttempts = 50;
@@ -509,10 +509,26 @@ function generateBingoCell(gradeRange, selectedColors, selectedHoldTypes, select
       if (selectedSingle === 'color') {
         const randomColor = selectedColors[Math.floor(Math.random() * selectedColors.length)];
         const activityType = climbingType === 'bouldering' ? 'Boulder' : 'Route';
-        cellText = `${randomColor} ${activityType}`;
+        const potentialText = `${randomColor} ${activityType}`;
+        
+        // Check if this single attribute has already appeared twice
+        if ((singleAttributeCount[potentialText] || 0) >= 2) {
+          continue; // Try generating a different square
+        }
+        
+        cellText = potentialText;
+        singleAttributeCount[potentialText] = (singleAttributeCount[potentialText] || 0) + 1;
         squareType = 'single';
       } else if (selectedSingle === 'grade' && !isCircuitGrading) {
-        cellText = randomGrade;
+        const potentialText = randomGrade;
+        
+        // Check if this single attribute has already appeared twice
+        if ((singleAttributeCount[potentialText] || 0) >= 2) {
+          continue; // Try generating a different square
+        }
+        
+        cellText = potentialText;
+        singleAttributeCount[potentialText] = (singleAttributeCount[potentialText] || 0) + 1;
         squareType = 'single';
       } else if (selectedSingle === 'hold' && selectedHoldTypes.length > 0) {
         const holdType = getWeightedHoldType(selectedHoldTypes, gradePosition);
@@ -523,11 +539,27 @@ function generateBingoCell(gradeRange, selectedColors, selectedHoldTypes, select
           }
         }
         
-        cellText = `${holdType} Holds`;
+        const potentialText = `${holdType} Holds`;
+        
+        // Check if this single attribute has already appeared twice
+        if ((singleAttributeCount[potentialText] || 0) >= 2) {
+          continue; // Try generating a different square
+        }
+        
+        cellText = potentialText;
+        singleAttributeCount[potentialText] = (singleAttributeCount[potentialText] || 0) + 1;
         squareType = 'single';
       } else if (selectedSingle === 'wall' && selectedWallTypes.length > 0) {
         const wallType = selectedWallTypes[Math.floor(Math.random() * selectedWallTypes.length)];
-        cellText = `${wallType} Wall`;
+        const potentialText = `${wallType} Wall`;
+        
+        // Check if this single attribute has already appeared twice
+        if ((singleAttributeCount[potentialText] || 0) >= 2) {
+          continue; // Try generating a different square
+        }
+        
+        cellText = potentialText;
+        singleAttributeCount[potentialText] = (singleAttributeCount[potentialText] || 0) + 1;
         squareType = 'single';
       }
     }
@@ -747,6 +779,9 @@ function generateBingoCard() {
   
   bingoGrid.innerHTML = '';
 
+  // Track single attribute occurrences
+  const singleAttributeCount = {};
+
   for (let i = 0; i < 25; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
@@ -762,7 +797,8 @@ function generateBingoCard() {
         selectedWallTypes,
         isCircuitGrading,
         climbingType,
-        difficultyContext
+        difficultyContext,
+        singleAttributeCount
       );
     }
     
